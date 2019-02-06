@@ -1,0 +1,90 @@
+while True:
+    print "select operation"
+    print "1.login"
+    print "2.signup"
+    print "3.exit "
+    choice=input ("enter choice(1/2/3):")
+
+    if choice == '2':
+        u,p=[],[]
+        print " signup " 
+        fn=input("enter first name:")
+        ln=input("enter last name:")
+        un=input("enter user name:")
+        pass1=input("enter the password: ")
+        email=input("enter email:")
+        u.append(un)
+        p.append(pass1)
+        obj=open("detail.csv","a")
+        obj.write(fn)
+        obj.write(",")
+        obj.write(ln)
+        obj.write(",")
+        obj.write(un)
+        obj.write(",")
+        obj.write(pass1)
+        obj.write(",")
+        obj.write(email)
+        obj.write("\n")
+        obj.close()
+
+    if choice == '1' :
+        u,p=[],[]
+        print " login "
+        un2= input("Enter your username: ")
+        pass12 = input("Enter your password: ")
+        file1=open("detail.csv","r")
+        data=file1.readlines()
+        for line in data:
+            line=line.split(",")
+            u.append(line[2])
+            p.append(line[3])
+        file1.close()
+
+        if un2 in u:
+            if pass12 in p:
+                bal=10000
+                wd=0
+                dep=0
+                while True:
+                    print "select operation"
+                    print "a.do you want to withdraw?"
+                    print "b.do you want to deposit?"
+                    print "c.do you want to check balance?"
+                    print "d.do you want to change password?"
+                    print "e.do you want to transfer ?"
+                    print "f.do you want to logout?"
+                    choice1=input ("enter choice(a/b/c/d/e/f):")
+                    if choice1 == 'a':
+                       wd= input("enter the withdraw:")
+                       bal=bal-wd
+                       print "the balance left:",bal
+                
+                    if choice1 == 'b' :
+                        dep= input("enter the deposit:")
+                        bal=bal+dep
+                        print "the balance left:",bal
+                        
+                    if choice1 == 'c':
+                        print "the balance is:",bal
+                        
+                    if choice1 == 'd':
+                        newpassword=input("enter the new password:")
+                        x=users.index(username)
+                        pass1.pop(x)
+                        pass1.insert(x,newpassword)
+                        print"the new password is:",newpassword
+                        
+                    if choice1 == 'f':
+                        print 'logout'
+                        break
+                    obj=open("account.csv","w")
+                    obj.write(str(wd))
+                    obj.write(",")
+                    obj.write(str(dep))
+                    obj.write(",")
+                    obj.write(str(bal))
+                    obj.write("\n")
+                    obj.close()
+    if choice == '3':
+        break
